@@ -10,13 +10,14 @@ export class HttpClient implements IHttpClient {
         'Content-Type': 'application/json',
     }
 
-    public async Get(getApiRoute: (urls: ApiRoutes) => string): Promise<Readonly<{}>> {
-        let url: string = this.urls.baseUrl + getApiRoute(this.urls);
+    public async Get(url: string): Promise<Readonly<{}>> {
+        let fullUrl: string = this.urls.baseUrl + url;
         return await axios(url);
     }
 
-    public async Post(getApiRoute: (urls: ApiRoutes) => string): Promise<Readonly<{}>> {
-        throw new Error("Method not implemented.");
+    public async Post(url: string, model: {}): Promise<Readonly<{}>> {
+        let fullUrl: string = this.urls.baseUrl + url;
+        return await axios.post(fullUrl, model);
     }
     public async Put(getApiRoute: (urls: ApiRoutes) => string): Promise<Readonly<{}>> {
         throw new Error("Method not implemented.");
